@@ -1,22 +1,44 @@
 import React, {useState} from 'react'
-import ReactDom from 'react-dom'
 import './index.css'
+import Colors from './components/Colors'
+import Summary from './components/Summary'
 
 export const App = () => {
+
+//setting state here
 const [happiness,setHappiness] = useState('happy')
 const [feeling, setFeeling] = useState('')
 const [reason, setReason] = useState('')
 const [color, setColor] = useState('Blue')
 
+const [showFeeling, setShowfeeling] = useState(true)
+const [showMoodDscr, setshowMoodDescr] = useState(false)
+const [showMoodDscr2, setshowMoodDescr2] = useState(false)
+const [showSummary, setShowSummary] = useState(false)
+
+const [showColor, setShowcolor] = useState(false)
+
 const [showResult, setShowResult] = useState(false)
 
-const handleSubmit = (event) => {
-  event.preventDefault()
-  setShowResult(true)
+console.log(color)
+console.log(reason)
+
+//handlesubmit
+const handleSubmit1 = (e) => {
+  e.preventDefault()
+  setshowMoodDescr(false)
+  setshowMoodDescr2(true)
+}
+
+const handleSubmit2 = (e) => {
+  e.preventDefault()
+  setshowMoodDescr2(false)
+  setShowcolor(true)
 }
 
   return (
-    <div className="myResult">
+    <div className="wrapper">
+      <div className="container">
       {showResult && (
         <div className="theResult">
           <h1>Here's your result!</h1>
@@ -28,11 +50,12 @@ const handleSubmit = (event) => {
 
 
       )}
-      {!showResult && (
-
-        <form onSubmit={handleSubmit}>
+      {showFeeling && (
+      
+        
           <div className="feelings">
-            <h1>Choose your mood:</h1>
+            <h1>Hi there how do you feel today?</h1>
+            <div className="aria-label">
             <label>
               <input
                 type="radio"
@@ -41,7 +64,7 @@ const handleSubmit = (event) => {
                 checked={happiness === 'happy'} />
               <span role="img" aria-label="Happy face">
                 😀
-        </span>
+              </span>
             </label>
 
             <label>
@@ -51,31 +74,41 @@ const handleSubmit = (event) => {
                 checked={happiness === "sad"} />
               <span role="img" aria-label="Sad face">
               😭
-       </span>
+              </span>
             </label>
+            <button onClick={()=> {
+              setShowfeeling(false)
+              setshowMoodDescr(true)
+              }}>Next</button>
+              </div>
           </div>
-          <div className="thought">
-            <label>
-            <h2>How are you feeling?</h2>
-        <input type="text" value={feeling} onChange={(event) => setFeeling(event.target.value)} />
-            </label>
-            <label>
-              <h2>And why is that?</h2>
-              <input type="text" value={reason} onChange={(event) => setReason(event.target.value)} />
-            </label>
-            <h2>Your mood-color</h2>
-            <select onChange={(event) => setColor(event.target.value)}>
-              <option value="Blue">Blue</option>
-              <option value="Green">Green</option>
-              <option value="Red">Red</option>
-            </select>
-           </div>
-          <br></br>
-          <button type="submit">Send my feelings!</button>
-        </form>
-
-
+          
+          
+    
       )}
+      {showMoodDscr && <div className="description">
+      <form onSubmit={(e)=> handleSubmit1(e)}>
+        <label>
+            <h2>How are you feeling?</h2>
+            <input placeholder="Type something..." type="text" value={feeling} onChange={(e) => setFeeling(e.target.value)} />
+            </label></form>
+             </div>}
+
+      {showMoodDscr2 && <div className="description-2">
+      <form onSubmit={(e)=> handleSubmit2(e)}>
+        <label>
+            <h2>You are feeling {feeling } why is that?</h2>
+            <input placeholder="Type something..." type="text" value={reason} onChange={(e) => setReason(e.target.value)} />
+            </label></form>
+        
+        </div>}  
+
+
+      {showColor && <Colors setColor={setColor} setShowColor={setShowcolor} setShowSummary={setShowSummary} />}    
+
+      {showSummary && <Summary happiness={happiness} feeling={feeling} reason={reason} color={color} />}  
+      
+        </div>
     </div>
   )
 }

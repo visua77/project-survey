@@ -41,7 +41,6 @@ const handleSubmit2 = (e) => {
 }
 
 const wrapperStyle = {
-  
   background: `linear-gradient(to right, ${color}, #bdfff3)`
 }
 

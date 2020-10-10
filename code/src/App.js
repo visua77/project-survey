@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import './index.css'
 import Colors from './components/Colors'
+import { SketchPicker } from 'react-color'
 import Summary from './components/Summary'
 
 export const App = () => {
@@ -9,7 +10,7 @@ export const App = () => {
 const [happiness,setHappiness] = useState('happy')
 const [feeling, setFeeling] = useState('')
 const [reason, setReason] = useState('')
-const [color, setColor] = useState('Blue')
+const [color, setColor] = useState('#4ac29a')
 
 const [showFeeling, setShowfeeling] = useState(true)
 const [showMoodDscr, setshowMoodDescr] = useState(false)
@@ -20,8 +21,11 @@ const [showColor, setShowcolor] = useState(false)
 
 const [showResult, setShowResult] = useState(false)
 
-console.log(color)
-console.log(reason)
+console.log(showColor)
+
+const handlechange = (color, event)=> {
+  setColor(color.hex)
+  }
 
 //handlesubmit
 const handleSubmit1 = (e) => {
@@ -36,8 +40,13 @@ const handleSubmit2 = (e) => {
   setShowcolor(true)
 }
 
+const wrapperStyle = {
+  
+  background: `linear-gradient(to right, ${color}, #bdfff3)`
+}
+
   return (
-    <div className="wrapper">
+    <div className="wrapper" style={wrapperStyle}>
       <div className="container">
       {showResult && (
         <div className="theResult">
@@ -104,7 +113,12 @@ const handleSubmit2 = (e) => {
         </div>}  
 
 
-      {showColor && <Colors setColor={setColor} setShowColor={setShowcolor} setShowSummary={setShowSummary} />}    
+      {showColor && <><SketchPicker color={color} onChange={handlechange} />
+      <p className="spacer"><button onClick={()=> {
+        setShowcolor(false)
+        setShowSummary(true)
+        }}>Next</button>
+        </p></>}    
 
       {showSummary && <Summary happiness={happiness} feeling={feeling} reason={reason} color={color} />}  
       

@@ -39,6 +39,10 @@
         padding:.2rem;
     }
 
+    p.spacer {
+        margin-top:1rem;
+    }
+
     button {
         font-size: 1.25rem;
         padding:.5rem;

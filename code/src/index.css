@@ -22,7 +22,7 @@
     h1 {
         font-family: 'Montserrat', sans-serif;
         font-weight: 400;
-        font-size: 4rem;
+        font-size: clamp(1rem, calc(5vw + 1rem), 4rem);
         margin-bottom: 1rem;
     }
 
@@ -30,6 +30,7 @@
         font-family: 'Montserrat', sans-serif;
         font-weight: 400;
         font-size: 4rem;
+        font-size: clamp(1rem, calc(5vw + 1rem), 4rem);
         margin-bottom: 1rem;
         
     }
@@ -61,7 +62,8 @@
 
     input {
         background: none;
-        font-size: 2rem;
+        max-width: 80%;
+        font-size: clamp(1rem, calc(1vw + 1rem), 2rem);
         padding:.5rem;
         border:0; 
         border-bottom:1px dotted rgb(138, 138, 138);
@@ -83,6 +85,7 @@
     }
 
     .container {
+        max-width: 80%;
         background: rgba(255, 255, 255, .7);
         margin:2rem;
         padding:2rem;

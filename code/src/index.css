@@ -62,7 +62,6 @@
 
     input {
         background: none;
-        max-width: 80%;
         font-size: clamp(1rem, calc(1vw + 1rem), 2rem);
         padding:.5rem;
         border:0; 

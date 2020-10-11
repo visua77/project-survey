@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import './index.css'
-import Colors from './components/Colors'
 import { SketchPicker } from 'react-color'
 import Summary from './components/Summary'
 

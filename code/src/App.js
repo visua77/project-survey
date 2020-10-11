@@ -19,9 +19,7 @@ const [showSummary, setShowSummary] = useState(false)
 
 const [showColor, setShowcolor] = useState(false)
 
-const [showResult, setShowResult] = useState(false)
 
-console.log(showColor)
 
 const handlechange = (color, event)=> {
   setColor(color.hex)
@@ -30,14 +28,20 @@ const handlechange = (color, event)=> {
 //handlesubmit
 const handleSubmit1 = (e) => {
   e.preventDefault()
-  setshowMoodDescr(false)
-  setshowMoodDescr2(true)
+  if(feeling){
+    setshowMoodDescr(false)
+    setshowMoodDescr2(true)
+  }
+ 
 }
 
 const handleSubmit2 = (e) => {
   e.preventDefault()
-  setshowMoodDescr2(false)
-  setShowcolor(true)
+  if(reason){
+    setshowMoodDescr2(false)
+    setShowcolor(true)
+  }
+  
 }
 
 const wrapperStyle = {
@@ -47,17 +51,7 @@ const wrapperStyle = {
   return (
     <div className="wrapper" style={wrapperStyle}>
       <div className="container">
-      {showResult && (
-        <div className="theResult">
-          <h1>Here's your result!</h1>
-          <p>You are {happiness ==='happy' ? 'Super happy!' : 'Sad :('}</p>
-          <p>And you are feeling {feeling}</p>
-          <p>Coz of {reason}</p>
-          <p>You feel {color}</p>
-        </div>
-
-
-      )}
+      
       {showFeeling && (
       
         
